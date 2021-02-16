@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Route, Redirect } from "react-router-dom";
-import { userContext } from "./context";
+import { UserContext } from "./context";
 import Cookies from "js-cookie";
 import LoginLayout from "./layouts/LoginLayout";
 import MainLayout from "./layouts/MainLayout";
@@ -17,7 +17,7 @@ export const Analysis = () => <AnalysisLayout />;
 export const Start = () => <StartLayout />;
 
 export const PrivateRoute = ({ component: RouteComponent, ...rest }) => {
-  const user = useContext(userContext);
+  const user = useContext(UserContext);
   const token = Cookies.get("token");
   return (
     <Route

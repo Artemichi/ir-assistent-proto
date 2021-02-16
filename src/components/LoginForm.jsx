@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import Cookies from "js-cookie";
-import { userContext } from "../context";
+import { UserContext } from "../context";
 import { useHistory } from "react-router-dom";
 import Card from "antd/lib/card";
 import Form from "antd/lib/form/Form";
@@ -11,21 +11,19 @@ import Button from "antd/lib/button/button";
 import UserOutlined from "@ant-design/icons/UserOutlined";
 import LockOutlined from "@ant-design/icons/LockOutlined";
 import Title from "antd/lib/typography/Title";
-import Checkbox from "antd/lib/checkbox/Checkbox";
 import logo from "../assets/logo_s.svg";
 
 const LoginForm = () => {
   const [loading, setLoading] = useState(false);
-  const user = useContext(userContext);
+  const usercontext = useContext(UserContext);
   const history = useHistory();
 
-  const onFinish = ({ username, password, remember }) => {
+  const onFinish = ({ username, password }) => {
+    const token =
+      "12dhsdg1huf241h2gg3vbh21vbdh819759jhchn91-08c-789-nm199819823709j1f3j1g3bv12hbdh12vfhjdsb12hjbgehbdh1jb2dh1";
     setLoading(true);
-    user.set({ username, password });
-    Cookies.set(
-      "token",
-      "12dhsdg1huf241h2gg3vbh21vbdh819759jhchn91-08c-789-nm199819823709j1f3j1g3bv12hbdh12vfhjdsb12hjbgehbdh1jb2dh1"
-    );
+    usercontext.set({ username, password, token });
+    Cookies.set("token", token);
     setTimeout(() => {
       history.push("/");
     }, 2000);
@@ -73,9 +71,6 @@ const LoginForm = () => {
             type="password"
             placeholder="Пароль"
           />
-        </FormItem>
-        <FormItem name="remember" valuePropName="checked">
-          <Checkbox>Запомнить</Checkbox>
         </FormItem>
         <FormItem>
           <Button

@@ -3,14 +3,16 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Layout } from "antd";
 import SliderMenu from "../components/SliderMenu";
 import { Start, Dashboard, Analysis, Composite } from "../routes";
-import { LeftOutlined, RightOutlined } from "@ant-design/icons";
+import { MenuUnfoldOutlined } from "@ant-design/icons";
 
 const MainLayout = () => {
   const [collapsed, setCollapsed] = useState(true);
+  const [deg, setDeg] = useState(0);
   const { Header, Sider, Content } = Layout;
 
   const toggle = () => {
     setCollapsed(prev => !prev);
+    setDeg(prev => (prev === 0 ? 180 : 0));
   };
 
   return (
@@ -29,12 +31,15 @@ const MainLayout = () => {
         </Sider>
         <Layout>
           <Header style={{ padding: 0, background: "#fff", borderTopLeftRadius: 30 }}>
-            {React.createElement(collapsed ? RightOutlined : LeftOutlined, {
-              className: "trigger",
-              onClick: toggle,
-              style: { padding: "0 24px", cursor: "pointer", transition: "color 0.3s" },
-            })}
-            Единая цифровая платформа
+            <MenuUnfoldOutlined
+              rotate={deg}
+              onClick={toggle}
+              style={{
+                fontSize: 18,
+                padding: "24px 24px",
+                cursor: "pointer",
+              }}
+            />
           </Header>
           <Content
             className="site-layout-background"
