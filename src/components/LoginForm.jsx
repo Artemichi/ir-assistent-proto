@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
-import { User } from "../context";
-// ant
-import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint";
+import React, { useState, useContext } from "react";
+import Cookies from "js-cookie";
+import { userContext } from "../context";
+import { useHistory } from "react-router-dom";
 import Card from "antd/lib/card";
 import Form from "antd/lib/form/Form";
 import FormItem from "antd/lib/form/FormItem";
@@ -12,18 +12,22 @@ import UserOutlined from "@ant-design/icons/UserOutlined";
 import LockOutlined from "@ant-design/icons/LockOutlined";
 import Title from "antd/lib/typography/Title";
 import Checkbox from "antd/lib/checkbox/Checkbox";
-// img
-import logo from "../../assets/logo.svg";
+import logo from "../assets/logo_s.svg";
 
 const LoginForm = () => {
-  const [loading, setLoading] = React.useState(false);
-  const breakpoint = useBreakpoint();
-  const user = useContext(User);
+  const [loading, setLoading] = useState(false);
+  const user = useContext(userContext);
+  const history = useHistory();
 
-  const onFinish = ({ username, password }) => {
+  const onFinish = ({ username, password, remember }) => {
     setLoading(true);
+    user.set({ username, password });
+    Cookies.set(
+      "token",
+      "12dhsdg1huf241h2gg3vbh21vbdh819759jhchn91-08c-789-nm199819823709j1f3j1g3bv12hbdh12vfhjdsb12hjbgehbdh1jb2dh1"
+    );
     setTimeout(() => {
-      user.set({ username, password });
+      history.push("/");
     }, 2000);
   };
 
@@ -31,13 +35,8 @@ const LoginForm = () => {
     <Card
       title={
         <>
-          {!breakpoint.lg ? (
-            <>
-              <img src={logo} alt="rigintel_logo" />
-              <br />
-            </>
-          ) : null}
-
+          <img src={logo} alt="rigintel_logo" />
+          <br />
           <Title level={4}>Единая цифровая платформа</Title>
         </>
       }
@@ -79,7 +78,13 @@ const LoginForm = () => {
           <Checkbox>Запомнить</Checkbox>
         </FormItem>
         <FormItem>
-          <Button type="primary" htmlType="submit" className="login-form-button" loading={loading}>
+          <Button
+            type="primary"
+            htmlType="submit"
+            className="login-form-button"
+            loading={loading}
+            block
+          >
             Войти
           </Button>
         </FormItem>

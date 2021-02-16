@@ -1,17 +1,11 @@
-import React, { useContext } from "react";
-import { User } from "../context";
-import { Redirect } from "react-router-dom";
-// ant
+import React from "react";
 import Row from "antd/lib/row";
 import Col from "antd/lib/col";
-// components
-import LoginForm from "./LoginForm";
-// img
-import bg from "../../assets/bg.svg";
-import logo from "../../assets/logo.svg";
+import LoginForm from "../components/LoginForm";
+import bg from "../assets/bg.svg";
+import logo from "../assets/title.svg";
 
 const LoginLayout = () => {
-  const user = useContext(User);
   const mixin = {
     h_screen: {
       height: "100vh",
@@ -31,8 +25,7 @@ const LoginLayout = () => {
       marginTop: "2em",
     },
   };
-
-  return user.get === null ? (
+  return (
     <Row style={{ ...mixin.h_screen, ...mixin.bg }}>
       <Col span={0} lg={12}>
         <img src={logo} style={{ ...mixin.logo }} alt="rigintel_logo" />
@@ -47,8 +40,6 @@ const LoginLayout = () => {
         </Row>
       </Col>
     </Row>
-  ) : (
-    <Redirect to={"/"} />
   );
 };
 
