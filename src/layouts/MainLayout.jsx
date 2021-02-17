@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Layout } from "antd";
+import Layout from "antd/lib/layout";
+import Text from "antd/lib/typography/Text";
 import SliderMenu from "../components/SliderMenu";
+import RightSquareTwoTone from "@ant-design/icons/RightCircleTwoTone";
 import { Start, Dashboard, Analysis, Composite } from "../routes";
-import { MenuUnfoldOutlined } from "@ant-design/icons";
 
 const MainLayout = () => {
-  const [collapsed, setCollapsed] = useState(true);
-  const [deg, setDeg] = useState(0);
+  const [collapsed, setCollapsed] = useState(false);
+  const [deg, setDeg] = useState(180);
   const { Header, Sider, Content } = Layout;
 
   const toggle = () => {
@@ -18,20 +19,12 @@ const MainLayout = () => {
   return (
     <Layout style={{ height: "100vh" }}>
       <Router>
-        <Sider
-          trigger={null}
-          collapsible
-          collapsed={collapsed}
-          style={{
-            overflow: "hidden",
-            background: "#f0f2f5",
-          }}
-        >
-          <SliderMenu collapsed={collapsed} />
+        <Sider trigger={null} collapsible theme="light" collapsedWidth="0" collapsed={collapsed}>
+          <SliderMenu />
         </Sider>
         <Layout>
-          <Header style={{ padding: 0, background: "#fff", borderTopLeftRadius: 30 }}>
-            <MenuUnfoldOutlined
+          <Header style={{ padding: 0, background: "#fff", display: "flex", alignItems: "center" }}>
+            <RightSquareTwoTone
               rotate={deg}
               onClick={toggle}
               style={{

@@ -3,7 +3,7 @@ import Row from "antd/lib/row";
 import Col from "antd/lib/col";
 import LoginForm from "../components/LoginForm";
 import bg from "../assets/bg.svg";
-import logo from "../assets/title.svg";
+import RIGINTEL from "../assets/title.svg";
 
 const LoginLayout = () => {
   const mixin = {
@@ -28,7 +28,7 @@ const LoginLayout = () => {
   return (
     <Row style={{ ...mixin.h_screen, ...mixin.bg }}>
       <Col span={0} lg={12}>
-        <img src={logo} style={{ ...mixin.logo }} alt="rigintel_logo" />
+        <img src={RIGINTEL} style={{ ...mixin.logo }} alt="rigintel" />
       </Col>
       <Col span={24} lg={12}>
         <Row align="middle" justify="center" style={{ ...mixin.h_screen }}>

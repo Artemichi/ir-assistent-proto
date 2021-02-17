@@ -3,15 +3,26 @@ import { Menu } from "antd";
 import { Link } from "react-router-dom";
 import { ProjectOutlined, BarChartOutlined, ReadOutlined, TableOutlined } from "@ant-design/icons";
 import logo_s from "../assets/logo_s.svg";
-import logo_f from "../assets/logo_f.svg";
+import Text from "antd/lib/typography/Text";
 
-const SliderMenu = ({ collapsed }) => {
+const SliderMenu = () => {
   return (
     <>
-      <div style={{ width: "auto", textAlign: "center", padding: "10px 10px" }}>
-        <img src={collapsed ? logo_s : logo_f} alt="rigintel_logo" />
+      <div
+        style={{
+          width: "auto",
+          display: "flex",
+          padding: "10px 10px",
+          justifyContent: "space-evenly",
+          alignItems: "center",
+        }}
+      >
+        <img src={logo_s} alt="rigintel_logo" />
+        <Text strong style={{ color: "#3F3D56", fontSize: 18 }}>
+          РИГИНТЕЛ
+        </Text>
       </div>
-      <Menu theme="light" mode="inline" defaultSelectedKeys={["1"]}>
+      <Menu mode="inline" defaultSelectedKeys={["1"]}>
         <Menu.Item key="1" icon={<ReadOutlined />}>
           <Link to="/">Главная</Link>
         </Menu.Item>
