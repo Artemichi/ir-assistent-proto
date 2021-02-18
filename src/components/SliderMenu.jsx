@@ -16,7 +16,7 @@ const SliderMenu = () => {
         style={{
           width: "auto",
           display: "flex",
-          padding: "10px 10px",
+          padding: "6px 18px",
           justifyContent: "space-evenly",
           alignItems: "center",
         }}

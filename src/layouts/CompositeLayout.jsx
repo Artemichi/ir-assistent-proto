@@ -1,4 +1,5 @@
 import React from "react";
+import Layout from "antd/lib/layout";
 import Row from "antd/lib/row";
 import Col from "antd/lib/col";
 import Divider from "antd/lib/divider";
@@ -105,9 +106,14 @@ const treeData = [
 ];
 
 const Composite = () => {
+  const [collapsed, setCollapsed] = React.useState(false);
+  const { Sider, Content } = Layout;
+  const toggle = () => {
+    setCollapsed(prev => !prev);
+  };
   return (
-    <Row style={{ height: "100%" }}>
-      <Col span={5}>
+    <Layout style={{ height: "100%" }}>
+      <Sider collapsible defaultCollapsed theme="light" width="300" collapsedWidth="0">
         <FilterOutlined />
 
         <Divider orientation="left" style={{ margin: "10px 0px" }}>
@@ -140,9 +146,9 @@ const Composite = () => {
         <Button type="primary" size="large" block>
           Посмотреть график
         </Button>
-      </Col>
-      <Col span={19}></Col>
-    </Row>
+      </Sider>
+      <Content>Сетевой график</Content>
+    </Layout>
   );
 };
 
