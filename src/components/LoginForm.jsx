@@ -1,6 +1,6 @@
-import React, { useState, useContext } from "react";
+import React from "react";
 import Cookies from "js-cookie";
-import { UserContext } from "../context";
+import { Auth } from "../context";
 import { useHistory } from "react-router-dom";
 import Card from "antd/lib/card";
 import Form from "antd/lib/form/Form";
@@ -8,24 +8,29 @@ import FormItem from "antd/lib/form/FormItem";
 import Input from "antd/lib/input/Input";
 import InputPassword from "antd/lib/input/Password";
 import Button from "antd/lib/button/button";
+import Progress from "antd/lib/progress";
+import Title from "antd/lib/typography/Title";
 import UserOutlined from "@ant-design/icons/UserOutlined";
 import LockOutlined from "@ant-design/icons/LockOutlined";
-import Title from "antd/lib/typography/Title";
 import logo from "../assets/logo_s.svg";
 
 const LoginForm = () => {
-  const [loading, setLoading] = useState(false);
-  const usercontext = useContext(UserContext);
+  const [loading, setLoading] = React.useState(false);
+  const [progressStatus, setProgressStatus] = React.useState("normal");
+  const [progressPercent, setProgressPercent] = React.useState(0);
+  const auth = React.useContext(Auth);
   const history = useHistory();
 
-  const onFinish = ({ username, password }) => {
-    const token =
-      "12dhsdg1huf241h2gg3vbh21vbdh819759jhchn91-08c-789-nm199819823709j1f3j1g3bv12hbdh12vfhjdsb12hjbgehbdh1jb2dh1";
+  const onFinish = () => {
     setLoading(true);
-    usercontext.set({ username, password, token });
-    Cookies.set("token", token);
+    setProgressPercent(100);
+    setProgressStatus("active");
+    Cookies.set("token", "12dhsdg1huf2412hjbgehbdh1jb2dh1");
+    auth.setLogin(true);
     setTimeout(() => {
-      history.push("/");
+      setProgressStatus("success");
+      setLoading(false);
+      setTimeout(() => history.push("/"), 500);
     }, 2000);
   };
 
@@ -82,6 +87,7 @@ const LoginForm = () => {
           >
             Войти
           </Button>
+          <Progress status={progressStatus} showInfo={false} percent={progressPercent} />
         </FormItem>
       </Form>
     </Card>

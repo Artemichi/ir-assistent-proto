@@ -2,8 +2,10 @@ import React from "react";
 import Card from "antd/lib/card";
 import Statistic from "antd/lib/statistic/Statistic";
 import Title from "antd/lib/typography/Title";
-import { List } from "antd";
-import { ArrowUpOutlined, ArrowDownOutlined } from "@ant-design/icons";
+import List from "antd/lib/list";
+import ListItem from "antd/lib/list/Item";
+import ArrowUpOutlined from "@ant-design/icons/ArrowUpOutlined";
+import ArrowDownOutlined from "@ant-design/icons/ArrowDownOutlined";
 import { dashboardData } from "../components/testdata/dashboard_data";
 
 const Dashboard = () => {
@@ -13,15 +15,15 @@ const Dashboard = () => {
         grid={{
           gutter: 16,
           xs: 1,
-          sm: 2,
-          md: 4,
-          lg: 4,
-          xl: 6,
-          xxl: 3,
+          sm: 1,
+          md: 2,
+          lg: 2,
+          xl: 3,
+          xxl: 4,
         }}
         dataSource={dashboardData}
         renderItem={item => (
-          <List.Item>
+          <ListItem>
             <Card bordered={false} title={item.name} hoverable>
               <Statistic
                 title="ПВ"
@@ -40,7 +42,7 @@ const Dashboard = () => {
                 suffix="%"
               />
             </Card>
-          </List.Item>
+          </ListItem>
         )}
       />
     </Card>

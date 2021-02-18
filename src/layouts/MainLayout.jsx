@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Layout from "antd/lib/layout";
-import Text from "antd/lib/typography/Text";
-import SliderMenu from "../components/SliderMenu";
-import RightSquareTwoTone from "@ant-design/icons/RightCircleTwoTone";
 import { Start, Dashboard, Analysis, Composite } from "../routes";
+import Layout from "antd/lib/layout";
+import Button from "antd/lib/button";
+import SliderMenu from "../components/SliderMenu";
+import MenuFoldOutlined from "@ant-design/icons/MenuFoldOutlined";
 
 const MainLayout = () => {
-  const [collapsed, setCollapsed] = useState(false);
-  const [deg, setDeg] = useState(180);
+  const [collapsed, setCollapsed] = React.useState(false);
+  const [deg, setDeg] = React.useState(0);
   const { Header, Sider, Content } = Layout;
 
   const toggle = () => {
@@ -23,16 +23,15 @@ const MainLayout = () => {
           <SliderMenu />
         </Sider>
         <Layout>
-          <Header style={{ padding: 0, background: "#fff", display: "flex", alignItems: "center" }}>
-            <RightSquareTwoTone
-              rotate={deg}
-              onClick={toggle}
-              style={{
-                fontSize: 18,
-                padding: "24px 24px",
-                cursor: "pointer",
-              }}
-            />
+          <Header
+            style={{
+              padding: "0px 24px",
+              background: "#fff",
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <Button type="default" icon={<MenuFoldOutlined rotate={deg} />} onClick={toggle} />
           </Header>
           <Content
             className="site-layout-background"

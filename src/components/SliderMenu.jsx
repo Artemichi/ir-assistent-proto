@@ -1,9 +1,13 @@
 import React from "react";
-import { Menu } from "antd";
 import { Link } from "react-router-dom";
-import { ProjectOutlined, BarChartOutlined, ReadOutlined, TableOutlined } from "@ant-design/icons";
-import logo_s from "../assets/logo_s.svg";
+import Menu from "antd/lib/menu";
+import MenuItem from "antd/lib/menu/MenuItem";
 import Text from "antd/lib/typography/Text";
+import ProjectOutlined from "@ant-design/icons/ProjectOutlined";
+import BarChartOutlined from "@ant-design/icons/BarChartOutlined";
+import ReadOutlined from "@ant-design/icons/ReadOutlined";
+import TableOutlined from "@ant-design/icons/TableOutlined";
+import logo_s from "../assets/logo_s.svg";
 
 const SliderMenu = () => {
   return (
@@ -23,18 +27,18 @@ const SliderMenu = () => {
         </Text>
       </div>
       <Menu mode="inline" defaultSelectedKeys={["1"]}>
-        <Menu.Item key="1" icon={<ReadOutlined />}>
+        <MenuItem key="1" icon={<ReadOutlined />}>
           <Link to="/">Главная</Link>
-        </Menu.Item>
-        <Menu.Item key="2" icon={<ProjectOutlined />}>
+        </MenuItem>
+        <MenuItem key="2" icon={<ProjectOutlined />}>
           <Link to="/dashboard">Сводка</Link>
-        </Menu.Item>
-        <Menu.Item key="3" icon={<TableOutlined />}>
+        </MenuItem>
+        <MenuItem key="3" icon={<TableOutlined />}>
           <Link to="/composite">Композит</Link>
-        </Menu.Item>
-        <Menu.Item key="4" icon={<BarChartOutlined />}>
+        </MenuItem>
+        <MenuItem key="4" icon={<BarChartOutlined />}>
           <Link to="/analysis">Лучшие практики</Link>
-        </Menu.Item>
+        </MenuItem>
       </Menu>
     </>
   );
