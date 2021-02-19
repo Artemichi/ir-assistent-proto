@@ -9,7 +9,7 @@ import ReadOutlined from "@ant-design/icons/ReadOutlined";
 import TableOutlined from "@ant-design/icons/TableOutlined";
 import logo_s from "../assets/logo_s.svg";
 
-const SliderMenu = () => {
+const SliderMenu = ({ handleMenuClick }) => {
   return (
     <>
       <div
@@ -26,7 +26,7 @@ const SliderMenu = () => {
           РИГИНТЕЛ
         </Text>
       </div>
-      <Menu mode="inline" defaultSelectedKeys={["1"]}>
+      <Menu mode="inline" defaultSelectedKeys={["1"]} onClick={handleMenuClick}>
         <MenuItem key="1" icon={<ReadOutlined />}>
           <Link to="/">Главная</Link>
         </MenuItem>

@@ -1,7 +1,7 @@
 import React from "react";
 
 const Start = () => {
-  return <div>START</div>;
+  return <div></div>;
 };
 
 export default Start;

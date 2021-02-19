@@ -4,23 +4,21 @@ import { Start, Dashboard, Analysis, Composite } from "../routes";
 import Layout from "antd/lib/layout";
 import Button from "antd/lib/button";
 import SliderMenu from "../components/SliderMenu";
-import MenuFoldOutlined from "@ant-design/icons/MenuFoldOutlined";
+import MenuOutlined from "@ant-design/icons/MenuOutlined";
 
 const MainLayout = () => {
   const [collapsed, setCollapsed] = React.useState(false);
-  const [deg, setDeg] = React.useState(0);
   const { Header, Sider, Content } = Layout;
 
   const toggle = () => {
     setCollapsed(prev => !prev);
-    setDeg(prev => (prev === 0 ? 180 : 0));
   };
 
   return (
     <Layout style={{ height: "100vh" }}>
       <Router>
-        <Sider trigger={null} collapsible theme="light" collapsedWidth="0" collapsed={collapsed}>
-          <SliderMenu />
+        <Sider theme="light" trigger={null} collapsible collapsedWidth="0" collapsed={collapsed}>
+          <SliderMenu handleMenuClick={toggle} />
         </Sider>
         <Layout>
           <Header
@@ -31,12 +29,11 @@ const MainLayout = () => {
               alignItems: "center",
             }}
           >
-            <Button type="default" icon={<MenuFoldOutlined rotate={deg} />} onClick={toggle} />
+            <Button type="default" icon={<MenuOutlined />} onClick={toggle} />
           </Header>
           <Content
             className="site-layout-background"
             style={{
-              padding: 24,
               background: "#fff",
             }}
           >

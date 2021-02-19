@@ -1,13 +1,15 @@
 import React from "react";
+import QueueAnim from "rc-queue-anim";
 import Layout from "antd/lib/layout";
-import Row from "antd/lib/row";
-import Col from "antd/lib/col";
 import Divider from "antd/lib/divider";
 import Checkbox from "antd/lib/checkbox/Checkbox";
 import Button from "antd/lib/button";
 import Table from "antd/lib/table/Table";
 import Tree from "antd/lib/tree";
-import FilterOutlined from "@ant-design/icons/FilterOutlined";
+import Space from "antd/lib/space";
+import PlusSquareOutlined from "@ant-design/icons/PlusSquareOutlined";
+import MinusSquareOutlined from "@ant-design/icons/MinusSquareOutlined";
+import CompositeTable from "../components/CompositeTable";
 
 const columns = [
   {
@@ -53,7 +55,6 @@ const data = [
     check: (() => <Checkbox defaultChecked />)(),
   },
 ];
-
 const treeData = [
   {
     title: "Приобское",
@@ -103,51 +104,71 @@ const treeData = [
     title: "Самотлорское",
     key: "0-2",
   },
+  {
+    title: "Ромашкинское",
+    key: "0-3",
+  },
+  {
+    title: "Повховское",
+    key: "0-4",
+  },
 ];
 
 const Composite = () => {
   const [collapsed, setCollapsed] = React.useState(false);
   const { Sider, Content } = Layout;
-  const toggle = () => {
-    setCollapsed(prev => !prev);
-  };
+
   return (
     <Layout style={{ height: "100%" }}>
-      <Sider collapsible defaultCollapsed theme="light" width="300" collapsedWidth="0">
-        <FilterOutlined />
+      <Sider
+        trigger={collapsed ? <PlusSquareOutlined /> : <MinusSquareOutlined />}
+        collapsible
+        collapsedWidth="0"
+        onCollapse={() => {
+          setCollapsed(prev => !prev);
+        }}
+        theme="light"
+        width="300"
+        zeroWidthTriggerStyle={{ top: 0 }}
+        style={{ padding: "0px 10px" }}
+      >
+        <QueueAnim delay={400} animConfig={[{ opacity: [1, 0] }]}>
+          <Divider orientation="center" style={{ margin: "10px 0px" }} key="a">
+            Композит
+          </Divider>
 
-        <Divider orientation="left" style={{ margin: "10px 0px" }}>
-          Композит
-        </Divider>
+          <Tree checkable treeData={treeData} height={400} key="b" />
 
-        <Tree
-          checkable
-          defaultExpandedKeys={["0-0-0"]}
-          defaultSelectedKeys={[]}
-          defaultCheckedKeys={["0-0-0"]}
-          treeData={treeData}
-          height={400}
-        />
-
-        <Divider orientation="left" style={{ margin: "10px 0px" }}>
-          Конструкция КНБК
-        </Divider>
-        <Table
-          columns={columns}
-          dataSource={data}
-          size="small"
-          showHeader={false}
-          pagination={false}
-        />
-        <Button type="primary" size="large" block>
-          Построить скважину
-        </Button>
-        <Divider style={{ margin: "5px 0px" }} />
-        <Button type="primary" size="large" block>
-          Посмотреть график
-        </Button>
+          <Divider orientation="center" style={{ margin: "10px 0px" }} key="c">
+            Конструкция КНБК
+          </Divider>
+          <Table
+            key="d"
+            columns={columns}
+            dataSource={data}
+            size="small"
+            showHeader={false}
+            pagination={false}
+          />
+          <Space
+            direction="vertical"
+            size="middle"
+            style={{ width: "100%", marginTop: 20 }}
+            key="e"
+          >
+            <Button type="default" size="large" block>
+              Построить скважину
+            </Button>
+            <Button type="default" size="large" block>
+              Посмотреть график
+            </Button>
+          </Space>
+        </QueueAnim>
       </Sider>
-      <Content>Сетевой график</Content>
+      <Content style={{ width: "100vh", display: "flex" }}>
+        <div style={{ flex: 1 }}></div>
+        <CompositeTable />
+      </Content>
     </Layout>
   );
 };
