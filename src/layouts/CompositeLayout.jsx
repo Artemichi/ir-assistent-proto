@@ -1,5 +1,4 @@
 import React from "react";
-import QueueAnim from "rc-queue-anim";
 import Layout from "antd/lib/layout";
 import Divider from "antd/lib/divider";
 import Checkbox from "antd/lib/checkbox/Checkbox";
@@ -10,6 +9,8 @@ import Space from "antd/lib/space";
 import PlusSquareOutlined from "@ant-design/icons/PlusSquareOutlined";
 import MinusSquareOutlined from "@ant-design/icons/MinusSquareOutlined";
 import CompositeTable from "../components/CompositeTable";
+import CompositeChart from "../components/CompositeChart";
+import { treeData } from "../components/testdata/analysis_data";
 
 const columns = [
   {
@@ -55,67 +56,10 @@ const data = [
     check: (() => <Checkbox defaultChecked />)(),
   },
 ];
-const treeData = [
-  {
-    title: "Приобское",
-    key: "0-0",
-    children: [
-      {
-        title: "192",
-        key: "0-0-0",
-        children: [
-          {
-            title: "8801",
-            key: "0-0-0-0",
-            children: [{ title: "1", key: "0-0-0-0-0" }],
-          },
-          {
-            title: "8802",
-            key: "0-0-0-1",
-            children: [{ title: "1", key: "0-0-0-1-0" }],
-          },
-          {
-            title: "8803",
-            key: "0-0-0-2",
-            children: [{ title: "1", key: "0-0-0-2-0" }],
-          },
-          {
-            title: "8804",
-            key: "0-0-0-3",
-            children: [{ title: "1", key: "0-0-0-3-0" }],
-          },
-        ],
-      },
-      {
-        title: "193",
-        key: "0-0-1",
-      },
-      {
-        title: "194",
-        key: "0-0-2",
-      },
-    ],
-  },
-  {
-    title: "Суторминское",
-    key: "0-1",
-  },
-  {
-    title: "Самотлорское",
-    key: "0-2",
-  },
-  {
-    title: "Ромашкинское",
-    key: "0-3",
-  },
-  {
-    title: "Повховское",
-    key: "0-4",
-  },
-];
 
 const Composite = () => {
   const [collapsed, setCollapsed] = React.useState(false);
+  const [click, setClick] = React.useState(false);
   const { Sider, Content } = Layout;
 
   return (
@@ -132,42 +76,39 @@ const Composite = () => {
         zeroWidthTriggerStyle={{ top: 0 }}
         style={{ padding: "0px 10px" }}
       >
-        <QueueAnim delay={400} animConfig={[{ opacity: [1, 0] }]}>
-          <Divider orientation="center" style={{ margin: "10px 0px" }} key="a">
-            Композит
-          </Divider>
+        <Divider orientation="center" style={{ margin: "10px 0px" }}>
+          Месторождения
+        </Divider>
 
-          <Tree checkable treeData={treeData} height={400} key="b" />
+        <Tree checkable treeData={treeData} height={400} />
 
-          <Divider orientation="center" style={{ margin: "10px 0px" }} key="c">
-            Конструкция КНБК
-          </Divider>
-          <Table
-            key="d"
-            columns={columns}
-            dataSource={data}
-            size="small"
-            showHeader={false}
-            pagination={false}
-          />
-          <Space
-            direction="vertical"
-            size="middle"
-            style={{ width: "100%", marginTop: 20 }}
-            key="e"
-          >
-            <Button type="default" size="large" block>
-              Построить скважину
-            </Button>
-            <Button type="default" size="large" block>
-              Посмотреть график
-            </Button>
-          </Space>
-        </QueueAnim>
+        <Divider orientation="center" style={{ margin: "10px 0px" }}>
+          Конструкция КНБК
+        </Divider>
+        <Table
+          columns={columns}
+          dataSource={data}
+          size="small"
+          showHeader={false}
+          pagination={false}
+        />
+        <Space direction="vertical" size="middle" style={{ width: "100%", marginTop: 20 }}>
+          <Button type="default" size="large" block onClick={() => setClick(true)}>
+            Построить скважину
+          </Button>
+        </Space>
       </Sider>
-      <Content style={{ width: "100vh", display: "flex" }}>
-        <div style={{ flex: 1 }}></div>
-        <CompositeTable />
+      <Content style={{ display: "flex", overflow: "hidden" }}>
+        {click && (
+          <>
+            <div style={{ flex: 1 }}>
+              <CompositeTable />
+            </div>
+            <div style={{ flex: 1 }}>
+              <CompositeChart />
+            </div>
+          </>
+        )}
       </Content>
     </Layout>
   );

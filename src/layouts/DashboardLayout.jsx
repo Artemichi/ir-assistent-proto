@@ -25,22 +25,32 @@ const Dashboard = () => {
         renderItem={item => (
           <ListItem>
             <Card bordered={false} title={item.name} hoverable>
-              <Statistic
-                title="ПВ"
-                value={item.pv}
-                precision={2}
-                valueStyle={{ color: "#00A31A" }}
-                prefix={<ArrowUpOutlined />}
-                suffix="%"
-              />
-              <Statistic
-                title="НПВ"
-                value={item.npv}
-                precision={2}
-                valueStyle={{ color: "#00A31A" }}
-                prefix={<ArrowDownOutlined />}
-                suffix="%"
-              />
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <Statistic title="Бригада" value={item.brigade} />
+                <Statistic title="План" value={item.plan} />
+              </div>
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <Statistic
+                  title="ПВ"
+                  value={item.pv}
+                  precision={2}
+                  valueStyle={{ color: "#00A31A" }}
+                  prefix={<ArrowUpOutlined />}
+                  suffix="%"
+                />
+                <Statistic
+                  title="НПВ"
+                  value={item.npv}
+                  precision={2}
+                  valueStyle={{ color: "#d9363e" }}
+                  prefix={<ArrowDownOutlined />}
+                  suffix="%"
+                />
+              </div>
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <Statistic title="Скрытое НПВ" value={item.hidden_npv} />
+                <Statistic title="Послед. операция" value={item.lastOperation} />
+              </div>
             </Card>
           </ListItem>
         )}
