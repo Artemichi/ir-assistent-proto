@@ -21,13 +21,13 @@ const AnalysisChart = () => {
     chart: { height: 900 },
     series: [
       {
-        color: "red",
+        color: "green",
         name: 9500,
         type: "bar",
         data: d9500,
       },
       {
-        color: "red",
+        color: "blue",
         name: 9501,
         type: "bar",
         data: d9501,
