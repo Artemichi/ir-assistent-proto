@@ -34,7 +34,7 @@ const Analysis = () => {
   const { Option } = Select;
   const factor = (
     <Select
-      size="large"
+      defaultOpen
       style={{ width: 200, margin: "0px 5px 10px 0px" }}
       onChange={handleChange}
       placeholder="Фактор"
@@ -61,13 +61,13 @@ const Analysis = () => {
             <Divider orientation="left" style={{ margin: "10px 0px" }}>
               Участки
             </Divider>
-            <Tree checkable treeData={treeData} height={500} />
+            <Tree checkable treeData={treeData} height={400} />
           </div>
           <div style={{ flex: 1 }}>
             <Divider orientation="left" style={{ margin: "10px 0px" }}>
               Операции
             </Divider>
-            <Tree checkable treeData={treeOperations} height={500} />
+            <Tree checkable treeData={treeOperations} height={400} />
           </div>
         </div>
         <Divider style={{ margin: "10px 0px" }}>Факторы влияния</Divider>
@@ -83,9 +83,7 @@ const Analysis = () => {
           Добавить
         </Button>
       </div>
-      <div style={{ flex: 2 }}>
-        <AnalysisChart />
-      </div>
+      <div style={{ flex: 2 }}>{!!factorValues.length && <AnalysisChart />}</div>
     </div>
   );
 };

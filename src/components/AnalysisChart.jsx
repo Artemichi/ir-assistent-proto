@@ -4,9 +4,9 @@ import HighchartsReact from "highcharts-react-official";
 import { well9500, well9501, well9502 } from "./testdata/composite_data";
 
 const AnalysisChart = () => {
-  const d9500 = well9500.map(p => [p.tg, p.depth]);
-  const d9501 = well9501.map(p => [p.tg, p.depth]);
-  const d9502 = well9502.map(p => [p.tg, p.depth]);
+  const d9500 = well9500.map(p => [p.tg, p.depth * Math.random()]);
+  const d9501 = well9501.map(p => [p.tg, p.depth * Math.random()]);
+  const d9502 = well9502.map(p => [p.tg, p.depth * Math.random()]);
 
   const options = {
     title: {
@@ -15,7 +15,7 @@ const AnalysisChart = () => {
     credits: { enabled: false },
     yAxis: {
       title: {
-        text: "Глубина",
+        text: "Коэффициент влияние",
       },
     },
     chart: { height: 900 },
