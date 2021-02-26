@@ -1,10 +1,11 @@
 import React from "react";
-import { treeData, treeOperations } from "../components/testdata/analysis_data";
+import { treeData, treeOperations, treeSpeed } from "../components/testdata/analysis_data";
 import Divider from "antd/lib/divider";
 import Tree from "antd/lib/tree";
 import AnalysisChart from "../components/AnalysisChart";
 import Select from "antd/lib/select";
 import Button from "antd/lib/button";
+import Slider from "antd/lib/slider";
 
 const factors = [
   { value: "drt", title: "Тип БУ" },
@@ -23,6 +24,37 @@ const factors = [
   { value: "dp", title: "Параметры бурения" },
   { value: "oc", title: "Контроль операций" },
 ];
+
+const marks = {
+  400: {
+    style: {
+      color: "#949190",
+      fontSize: 10,
+    },
+    label: "Направление",
+  },
+  800: {
+    style: {
+      color: "#949190",
+      fontSize: 10,
+    },
+    label: "Кондуктор",
+  },
+  1200: {
+    style: {
+      color: "#949190",
+      fontSize: 10,
+    },
+    label: "Экс. колонна",
+  },
+  1600: {
+    style: {
+      color: "#949190",
+      fontSize: 10,
+    },
+    label: "Хвостовик",
+  },
+};
 
 const Analysis = () => {
   const [factorsSelecrors, setFactorsSelectors] = React.useState(null);
@@ -69,10 +101,32 @@ const Analysis = () => {
             </Divider>
             <Tree checkable treeData={treeOperations} height={400} />
           </div>
+          <div style={{ flex: 1 }}>
+            <Divider orientation="left" style={{ margin: "10px 0px" }}>
+              Интервал
+            </Divider>
+            <Slider
+              vertical
+              tooltipVisible
+              min={0}
+              max={3000}
+              marks={marks}
+              reverse
+              tipFormatter={v => `${v} м`}
+              range={{ draggableTrack: true }}
+              defaultValue={[100, 700]}
+              style={{ height: 400 }}
+            />
+          </div>
+          <div style={{ flex: 1 }}>
+            <Divider orientation="left" style={{ margin: "10px 0px" }}>
+              Скорости
+            </Divider>
+            <Tree checkable treeData={treeSpeed} height={400} />
+          </div>
         </div>
-        <Divider style={{ margin: "10px 0px" }}>Факторы влияния</Divider>
+        <Divider style={{ margin: "30px 0px 0px 0px" }}>Факторы влияния</Divider>
         <div style={{ padding: 10 }}>{factorsSelecrors ? factorsSelecrors : "Пусто"}</div>
-        <Divider style={{ margin: "20px 0px" }}></Divider>
         <Button
           type="primary"
           block
@@ -83,7 +137,7 @@ const Analysis = () => {
           Добавить
         </Button>
       </div>
-      <div style={{ flex: 2 }}>{!!factorValues.length && <AnalysisChart />}</div>
+      <div style={{ flex: 1 }}>{!!factorValues.length && <AnalysisChart />}</div>
     </div>
   );
 };
