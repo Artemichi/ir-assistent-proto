@@ -1,45 +1,30 @@
 import React from "react";
 import * as Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import { well9500, well9501, well9502 } from "./testdata/composite_data";
 
-const AnalysisChart = () => {
-  const d9500 = well9500.map(p => [p.tg, p.depth * Math.random()]);
-  const d9501 = well9501.map(p => [p.tg, p.depth * Math.random()]);
-  const d9502 = well9502.map(p => [p.tg, p.depth * Math.random()]);
-
+const AnalysisChart = ({ categories, series }) => {
+  console.log(categories, series);
   const options = {
     title: {
       text: "",
     },
     credits: { enabled: false },
+    xAxis: {
+      categories: categories,
+    },
     yAxis: {
       title: {
-        text: "Коэффициент влияние",
+        text: "Процент влияние",
       },
     },
     legend: { enabled: false },
     chart: { height: 900 },
-    series: [
-      {
-        color: "green",
-        name: 9500,
-        type: "bar",
-        data: d9500,
+    plotOptions: {
+      series: {
+        stacking: "normal",
       },
-      {
-        color: "blue",
-        name: 9501,
-        type: "bar",
-        data: d9501,
-      },
-      {
-        color: "red",
-        name: 9502,
-        type: "bar",
-        data: d9502,
-      },
-    ],
+    },
+    series: series,
   };
   return <HighchartsReact highcharts={Highcharts} options={options} />;
 };

@@ -59,9 +59,25 @@ const marks = {
 const Analysis = () => {
   const [factorsSelecrors, setFactorsSelectors] = React.useState(null);
   const [factorValues, setFactorValues] = React.useState([]);
+  const [series, setSeries] = React.useState([]);
+  const [chart, setChart] = React.useState(false);
 
   const handleChange = v => {
-    setFactorValues(prev => [...prev, v]);
+    setSeries([
+      ...series,
+
+      {
+        type: "bar",
+        data: [
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+        ],
+      },
+    ]);
+    setFactorValues(prev => [...prev, factors.filter(f => f.value === v).pop().title]);
   };
   const { Option } = Select;
   const factor = (
@@ -73,9 +89,9 @@ const Analysis = () => {
       key={Math.random()}
     >
       {factors.map(({ value, title }) => {
-        if (factorValues.includes(value)) {
+        if (factorValues.includes(title)) {
           return (
-            <Option disabled value={value}>
+            <Option disabled value={value} key={Math.random()}>
               {title}
             </Option>
           );
@@ -126,18 +142,25 @@ const Analysis = () => {
           </div>
         </div>
         <Divider style={{ margin: "30px 0px 0px 0px" }}>Факторы влияния</Divider>
-        <div style={{ padding: 10 }}>{factorsSelecrors ? factorsSelecrors : "Пусто"}</div>
-        <Button
-          type="primary"
-          block
-          onClick={() =>
-            setFactorsSelectors(prev => (prev ? [...factorsSelecrors, factor] : [factor]))
-          }
-        >
-          Добавить
+        <div style={{ padding: 10 }}>
+          {factorsSelecrors && factorsSelecrors}
+
+          <Button
+            type="primary"
+            onClick={() =>
+              setFactorsSelectors(prev => (prev ? [...factorsSelecrors, factor] : [factor]))
+            }
+          >
+            Добавить
+          </Button>
+        </div>
+        <Button type="primary" onClick={() => setChart(true)} style={{ margin: 10 }}>
+          Построить график
         </Button>
       </div>
-      <div style={{ flex: 1 }}>{!!factorValues.length && <AnalysisChart />}</div>
+      <div style={{ flex: 1 }}>
+        {chart && <AnalysisChart categories={factorValues} series={series} />}
+      </div>
     </div>
   );
 };
