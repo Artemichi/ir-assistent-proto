@@ -18,6 +18,7 @@ const AnalysisChart = () => {
         text: "Коэффициент влияние",
       },
     },
+    legend: { enabled: false },
     chart: { height: 900 },
     series: [
       {
